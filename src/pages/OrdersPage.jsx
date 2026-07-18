@@ -6,6 +6,7 @@ function OrdersPage() {
   return (
     <>
       <title>Your Orders</title>
+      <link rel="icon" type="image/png" href="/orders-favicon.png" />
 
       <Header />
 
@@ -83,11 +84,11 @@ function OrdersPage() {
               </div>
 
               <div className="product-actions">
-                <a href="/tracking">
+                <Link to="/tracking">
                   <button className="track-package-button button-secondary">
                     Track package
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -134,11 +135,11 @@ function OrdersPage() {
               </div>
 
               <div className="product-actions">
-                <a href="/tracking">
+                <Link to="/tracking">
                   <button className="track-package-button button-secondary">
                     Track package
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
