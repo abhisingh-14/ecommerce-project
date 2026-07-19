@@ -4,8 +4,9 @@ import CheckmarkIcon from '../assets/images/icons/checkmark.png'
 import './HomePage.css'
 // import { products } from '../startingcode/data/products';
 import { useEffect, useState } from 'react';
+import formatMoney from '../utils/money';
 
-function HomePage() {
+function HomePage({ cart }) {
   // const response = await fetch('http://localhost:3000/api/products');
   // fetch('http://localhost:3000/api/products')
   //   .then((response) => {
@@ -21,18 +22,13 @@ function HomePage() {
   //     console.log(data);
   //   });
 
- const [products, setProducts] = useState([]);
- const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     axios.get('/api/products')
       .then((response) => {
         setProducts(response.data);
       });
-
-      axios.get('/api/cart-items')
-        .then((response) => {
-          setCart(response.data);
-        });
   }, []);
 
 
@@ -65,7 +61,7 @@ function HomePage() {
                 </div>
 
                 <div className="product-price">
-                  ${(product.priceCents / 100).toFixed(2)}
+                  {formatMoney(product.priceCents)}
                 </div>
 
                 <div className="product-quantity-container">
