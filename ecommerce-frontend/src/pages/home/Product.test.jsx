@@ -1,11 +1,18 @@
 import React from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Product from './Product';
+import userEvent from '@testing-library/user-event';
+import axios from 'axios';
+
+vi.mock('axios');
 
 describe('Product component', () => {
-  it('displays the product details correctly', () => {
-    const product = {
+  let product;
+  let loadCart; // mock function
+
+  beforeEach(() => {
+    product = {
       id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       image: "images/products/athletic-cotton-socks-6-pairs.jpg",
       name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
@@ -15,12 +22,13 @@ describe('Product component', () => {
       },
       priceCents: 1090,
       keywords: ["socks", "sports", "apparel"]
-    }
+    };
 
-    const loadCart = vi.fn(); // mock function
+    loadCart = vi.fn();
 
     render(<Product product={product} loadCart={loadCart} />);
-
+  });
+  it('displays the product details correctly', () => {
     expect(
       screen.getByText('Black and Gray Athletic Cotton Socks - 6 Pairs')
     ).toBeInTheDocument();
@@ -41,4 +49,20 @@ describe('Product component', () => {
       screen.getByText('87')
     ).toBeInTheDocument();
   });
+
+  it('adds a product to the cart', async () => {
+    const user = userEvent.setup();
+    const addToCartButton = screen.getByTestId('add-to-cart-button');
+    await user.click(addToCartButton);
+
+    expect(axios.post).toHaveBeenCalledWith(
+      '/api/cart-items',
+      {
+        productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+        quantity: 1
+      }
+    );
+
+    expect(loadCart).toHaveBeenCalled();
+  })
 });
