@@ -11,7 +11,7 @@ describe('formatMoney', () => {
     expect(formatMoney(100)).toBe('$1.00');
   })
 
-  it('works with the number 0', ()=> {
+  it('works with the number 0', () => {
     expect(formatMoney(0)).toBe('$0.00');
   })
 

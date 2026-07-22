@@ -67,7 +67,7 @@ describe('Product component', () => {
     expect(loadCart).toHaveBeenCalled();
   });
 
-  it('selects a quantity',async () => {
+  it('selects a quantity', async () => {
     const quantitySelector = screen.getByTestId('product-quantity-selector');
     expect(quantitySelector).toHaveValue('1');
 

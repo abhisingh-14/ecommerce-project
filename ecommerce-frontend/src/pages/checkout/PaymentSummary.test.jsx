@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { render, screen, within} from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter, useLocation } from 'react-router';
 import PaymentSummary from './PaymentSummary';
 import userEvent from '@testing-library/user-event';
@@ -73,8 +73,8 @@ describe('PaymentSummary component', () => {
 
   it('Places an Order', async () => {
     function Location() {
-    const location = useLocation();
-    return <div data-testid="url-path">{location.pathname}</div>
+      const location = useLocation();
+      return <div data-testid="url-path">{location.pathname}</div>
     };
 
     render(
@@ -93,5 +93,5 @@ describe('PaymentSummary component', () => {
     expect(axios.post).toHaveBeenCalledWith('/api/orders');
     expect(loadCart).toHaveBeenCalled();
     expect(screen.getByTestId('url-path')).toHaveTextContent('/orders');
-  }) 
+  })
 })

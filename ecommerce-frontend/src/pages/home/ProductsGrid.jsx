@@ -6,7 +6,7 @@ function ProductsGrid({ products, loadCart }) {
       {products.map((product) => {
 
         return (
-          <Product key={product.id} product={product} loadCart={loadCart}/>
+          <Product key={product.id} product={product} loadCart={loadCart} />
         );
       })}
     </div>

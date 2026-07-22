@@ -18,7 +18,7 @@ function TrackingPage({ cart }) {
     fetchTrackingData();
   }, [orderId]);
 
-  if(!order) {
+  if (!order) {
     return null;
   }
 
@@ -30,7 +30,7 @@ function TrackingPage({ cart }) {
   const timePassedMs = dayjs().valueOf() - order.orderTimeMs;
 
   let deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100;
-  if(deliveryPercent > 100) deliveryPercent = 100;
+  if (deliveryPercent > 100) deliveryPercent = 100;
 
   const isPreparing = deliveryPercent < 33;
   const isShipped = deliveryPercent >= 33 && deliveryPercent < 100;
@@ -50,7 +50,7 @@ function TrackingPage({ cart }) {
           </Link>
 
           <div className="delivery-date">
-            {deliveryPercent >= 100 ? 'Delivered on ' : 'Arriving on '} 
+            {deliveryPercent >= 100 ? 'Delivered on ' : 'Arriving on '}
             {dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
           </div>
 
@@ -79,7 +79,7 @@ function TrackingPage({ cart }) {
           <div className="progress-bar-container">
             <div className="progress-bar" style={{
               width: `${deliveryPercent}%`
-              }}></div>
+            }}></div>
           </div>
         </div>
       </div>
