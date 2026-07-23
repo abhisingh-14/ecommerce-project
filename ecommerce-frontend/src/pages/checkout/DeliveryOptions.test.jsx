@@ -2,6 +2,7 @@ import { it, expect, describe, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import DeliveryOptions from './DeliveryOptions';
 
 vi.mock('axios');
@@ -54,19 +55,19 @@ describe('DeliveryOptions component', () => {
     const deliveryOptionElems = screen.getAllByTestId('delivery-option');
     expect(deliveryOptionElems.length).toBe(3);
 
-    expect(deliveryOptionElems[0]).toHaveTextContent('Sunday, May 18');
+    expect(deliveryOptionElems[0]).toHaveTextContent(dayjs(deliveryOptions[0].estimatedDeliveryTimeMs).format('dddd, MMMM D'));
     expect(deliveryOptionElems[0]).toHaveTextContent('Free Shipping');
     expect(
       within(deliveryOptionElems[0]).getByTestId('delivery-option-input').checked
     ).toBe(false);
 
-    expect(deliveryOptionElems[1]).toHaveTextContent('Wednesday, May 14');
+    expect(deliveryOptionElems[1]).toHaveTextContent(dayjs(deliveryOptions[1].estimatedDeliveryTimeMs).format('dddd, MMMM D'));
     expect(deliveryOptionElems[1]).toHaveTextContent('$4.99 - Shipping');
     expect(
       within(deliveryOptionElems[1]).getByTestId('delivery-option-input').checked
     ).toBe(true);
 
-    expect(deliveryOptionElems[2]).toHaveTextContent('Monday, May 12');
+    expect(deliveryOptionElems[2]).toHaveTextContent(dayjs(deliveryOptions[2].estimatedDeliveryTimeMs).format('dddd, MMMM D'));
     expect(deliveryOptionElems[2]).toHaveTextContent('$9.99 - Shipping');
     expect(
       within(deliveryOptionElems[2]).getByTestId('delivery-option-input').checked
